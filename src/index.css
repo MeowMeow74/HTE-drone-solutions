@@ -1,0 +1,262 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #111;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5em;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1em;
+}
+
+nav a:hover {
+  color: #1abc9c;
+}
+
+/* ===== PAGE STRUCTURE ===== */
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.rail {
+  width: 100%;
+  height: auto;
+}
+
+/* ===== SLIDESHOW ===== */
+.slideshow {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.slides {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.slide {
+  flex: 0 0 100%;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ===== SLIDE TEXT ===== */
+.slide h2 {
+  position: absolute;
+  top: 25%;
+  left: 6%;
+  text-align: left;
+  font-family: 'Poppins', 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: black;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.4);
+  line-height: 1.2;
+  max-width: 600px;
+  z-index: 2;
+}
+
+.slide h2 span {
+  display: block;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: black;
+  margin-top: 0.4em;
+}
+
+/* ===== NAV ARROWS ===== */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2.5em;
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+  z-index: 300;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, background 0.3s ease;
+}
+
+.nav-arrow.left { left: 2%; }
+.nav-arrow.right { right: 2%; }
+
+.nav-arrow:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* ===== PRODUCT SHOWCASE BUTTON ===== */
+.scroll-btn {
+  position: fixed;
+
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 0.8em 2em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  z-index: 300;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, background 0.3s ease, transform 0.2s ease;
+}
+
+.scroll-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-50%) scale(1.05);
+  color:black;
+}
+
+/* ===== FADING LOGIC ===== */
+body.hide-controls .nav-arrow,
+body.hide-controls .scroll-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== BACK TO MAIN BUTTON ===== */
+.back-btn {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  border: 2px solid #333;
+  color: white;
+  padding: 0.7em 2em;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+  transition: opacity 0.4s ease, background 0.3s ease, transform 0.2s ease;
+}
+
+body.show-back .back-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.2);
+  color: black;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* shared button class */
+.action-btn {
+  padding: 1em 1.8em;
+  font-size: clamp(1rem, 1.6vw, 1.4rem);  /* TEXT SIZE: stays readable but doesn't explode */
+  font-weight: 500;
+  border-radius: 6px;
+  border: 2px solid #333;
+  width: clamp(260px, 55vw, 520px);       /* BUTTON WIDTH: grows significantly as screen widens */
+  text-align: center;
+  white-space: nowrap;                    /* no wrapping */
+  overflow: hidden;                       /* prevent spill */
+  text-overflow: ellipsis;                /* safe fallback */
+  display: inline-block;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+/* shared button class */
+
+/* ===== PRODUCT SECTION ===== */
+.product-showcase {
+  position: relative;
+  min-height: 200vh;
+  background: #fff;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5em 2em 8em;
+}
+
+.product-showcase h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.product-showcase p {
+  max-width: 700px;
+  line-height: 1.5;
+  font-size: 1.1em;
+}
+
+/* === footer === */
+footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 2em 0;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
