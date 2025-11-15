@@ -1,8 +1,56 @@
 // root component that strucutres whole webpage
 
-import { useRef } from "react";
-import Header from "./components/Header";
-import Slideshow from "./componets/Slideshow";
-import ProductShowcase from "./components/ProductShowcase";
-import Footer from "./components/Footer";
+import { useRef } from "react";  //useRef lets us scroll smoothly to specific sections
+import Header from "./components/Header.jsx";
+import Slideshow from "./components/Slideshow.jsx";
+import ProductShowcase from "./components/ProductShowcase.jsx";
+import Footer from "./components/Footer.jsx";
+import "./index.css";  // load css globally 
 
+
+// this is the real meat of the website, evertying we put in here will get dumped into
+// index.html, react will then fill in the html page with whatevr we put here (i think)
+// main.jsx is what actually connects the html to app, and renders App() into the html
+export default function App() {
+
+    // creating variables for references to sections on the page
+    const topRef = useRef(null);
+    const showcaseRef = useRef(null);
+
+    // scroll from slideshow to product showcase
+    const scrollToShowcase = () => {
+        showcaseRef.current?.scrollIntoView({ behavior: "smooth"});
+    };
+
+    // scroll from product showcase to top section
+    const scrollToTop = () => {
+        topRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    return(
+        <>
+        {/* {main section} */}
+        <div ref={topRef}>
+            <Header />
+            <Slideshow onShowcaseClick={scrollToShowcase} />
+
+        </div>
+
+        {/* <product showcase section */}
+        <div ref={showcaseRef}>
+            <ProductShowcase onBack={scrollToTop} />
+
+        </div>
+        
+        <Footer />
+
+        </>
+    )
+
+
+
+
+
+
+
+}
