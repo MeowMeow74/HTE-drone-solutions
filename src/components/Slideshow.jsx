@@ -23,10 +23,13 @@ export default function Slideshow({ onShowcaseClick, showControls }) {
         // { img: imgx, title:"XYZ", subtitle: "...."}
     ];
 
+    // time interval for changing slides on the webpage
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex(prev => (prev+1) % slides.length);
-        }, 4000);
+        }, 4500);
+
+    
 
         return() => clearInterval(interval);
     }, []);
