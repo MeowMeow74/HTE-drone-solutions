@@ -14,6 +14,7 @@ html, body {
   background: #000;
 }
 
+
 /* ===== HEADER ===== */
 header {
   position: fixed;
@@ -44,6 +45,7 @@ nav a:hover {
   color: #1abc9c;
 }
 
+
 /* ===== PAGE STRUCTURE ===== */
 .page-wrapper {
   position: relative;
@@ -55,6 +57,7 @@ nav a:hover {
   width: 100%;
   height: auto;
 }
+
 
 /* ===== SLIDESHOW ===== */
 .slideshow {
@@ -91,11 +94,57 @@ nav a:hover {
   object-position: center;
 }
 
+
+/* === SLIDING BARS === */
+.slide-bars {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6em;
+  z-index: 400;
+}
+
+.bar {
+  width: 50px;
+  height: 8px;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bar.active {
+  background: grey;
+  width: 90px;
+}
+
+.bar-label {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .bar.active .bar-label {
+    opacity: 1;
+  }
+}
+
+
 /* ===== SLIDE TEXT ===== */
 .slide h2 {
-  position: absolute;
-  top: 25%;
-  left: 6%;
+  /* no absolute positioning here */
+  position: static;                  /* or just delete 'position' entirely */
   text-align: left;
   font-family: 'Poppins', 'Lato', sans-serif;
   font-weight: 600;
@@ -104,7 +153,7 @@ nav a:hover {
   text-shadow: 0 3px 12px rgba(0,0,0,0.4);
   line-height: 1.2;
   max-width: 600px;
-  z-index: 2;
+  white-space: nowrap;               /* <- forces "HTE vision" to stay on one line */
 }
 
 .slide h2 span {
@@ -115,73 +164,62 @@ nav a:hover {
   margin-top: 0.4em;
 }
 
-/* ===== NAV ARROWS ===== */
-.nav-arrow {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  font-size: 2.5em;
-  cursor: pointer;
-  padding: 0.3em 0.5em;
-  border-radius: 3px;
-  z-index: 300;
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.4s ease, background 0.3s ease;
+.slide-text-block {
+  position: absolute;
+  top: 25%;
+  left: 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* left-align everything */
+  gap: 1em;                  /* space between title and button */
+  text-align: left;
+  z-index: 10;
 }
 
-.nav-arrow.left { left: 2%; }
-.nav-arrow.right { right: 2%; }
 
-.nav-arrow:hover {
-  background: rgba(0,0,0,0.8);
-}
 
 /* ===== PRODUCT SHOWCASE BUTTON ===== */
-.scroll-btn {
-  position: fixed;
-
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000;
-  color: #fff;
-  border: 2px solid #000;
-  padding: 0.8em 2em;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  font-weight: 500;
-  cursor: pointer;
+/* .showcase-btn {
+  position: absolute;
+  top: calc(25% + 90px);  directly under text  (adjust 25% based on h2 class top) */
+  /* left: 6%;
+  transform: translateY(20px);
+  background: black;
+  color: white;
+  border: 2px solid black;
+  padding: 1em 2em;
+  font-size: 1rem;
   border-radius: 4px;
-  letter-spacing: 0.05em;
-  z-index: 300;
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.4s ease, background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  z-index: 50;
+  transition: background 0.3s ease, transform 0.2s ease;
+} */
+
+.showcase-btn {
+  position: relative;   /* not absolute */
+  background: black;
+  color: white;
+  border: 2px solid black;
+  padding: 1em 2em;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 50;
+  transition: background 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;    /* aligns left with the text */
 }
 
-.scroll-btn:hover {
-  background: rgba(255,255,255,0.2);
-  transform: translateX(-50%) scale(1.05);
-  color:black;
-}
 
-/* ===== FADING LOGIC ===== */
-body.hide-controls .nav-arrow,
-body.hide-controls .scroll-btn {
-  opacity: 0;
-  pointer-events: none;
+.showcase-btn:hover {
+  background: #fff;
+  color: black;
+  transform: scale(1.03);  /* tiny, smooth, doesn’t shake layout */
 }
 
 /* ===== BACK TO MAIN BUTTON ===== */
 .back-btn {
-  position: fixed;
+  position: sticky;      /* This keeps it visible without JS */
   top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
   background: black;
   border: 2px solid #333;
   color: white;
@@ -190,24 +228,21 @@ body.hide-controls .scroll-btn {
   font-weight: 500;
   cursor: pointer;
   border-radius: 4px;
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;            /* Always visible */
+  pointer-events: auto;   /* Always clickable */
   z-index: 1200;
-  transition: opacity 0.4s ease, background 0.3s ease, transform 0.2s ease;
-}
-
-body.show-back .back-btn {
-  opacity: 1;
-  pointer-events: auto;
+  margin-bottom: 2em;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .back-btn:hover {
   background: rgba(255,255,255,0.2);
   color: black;
-  transform: translateX(-50%) scale(1.05);
+  transform: scale(1.05);
 }
 
-/* shared button class */
+
+/* ====== button effects for back button class ======*/
 .action-btn {
   padding: 1em 1.8em;
   font-size: clamp(1rem, 1.6vw, 1.4rem);  /* TEXT SIZE: stays readable but doesn't explode */
@@ -223,17 +258,17 @@ body.show-back .back-btn {
   transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-/* shared button class */
+
 
 /* ===== PRODUCT SECTION ===== */
 .product-showcase {
   position: relative;
-  min-height: 200vh;
+  min-height: auto;  /* controling height of bottom section */
   background: #fff;
   color: #333;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   padding: 5em 2em 8em;
@@ -250,7 +285,25 @@ body.show-back .back-btn {
   font-size: 1.1em;
 }
 
-/* === footer === */
+.product-example-img {
+  max-width: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 2em;
+
+}
+
+/* this is left here to leave some extra white space */
+.botom-space {
+  height:80vh;
+  background: white;
+}
+
+
+/* === FOOTER === */
 footer {
   background: #111;
   color: #fff;
