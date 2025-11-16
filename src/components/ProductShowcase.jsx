@@ -29,8 +29,10 @@ export default function ProductShowcase({ onBack }) {
             <p>This is a place holder.  adding galleries and descriptions later</p>
 
             {/* example product img */}
-            <img src={img4} alt="Product example" />
+            <img src={img4} alt="Product example" className="product-example-img" />
 
+            {/* extra whitespace for future content */}
+            <div className="botom-space"></div>
 
         </section>
     );

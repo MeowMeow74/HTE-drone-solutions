@@ -1,6 +1,6 @@
 // root component that strucutres whole webpage
 
-import { useRef } from "react";  //useRef lets us scroll smoothly to specific sections
+import { useRef, useState, useEffect } from "react";  //useRef lets us scroll smoothly to specific sections
 import Header from "./components/Header.jsx";
 import Slideshow from "./components/Slideshow.jsx";
 import ProductShowcase from "./components/ProductShowcase.jsx";
@@ -17,6 +17,9 @@ export default function App() {
     const topRef = useRef(null);
     const showcaseRef = useRef(null);
 
+    // controls whether slideshow buttons are visible or not 
+    // const [showControls, setShowControls] = useState(true);
+
     // scroll from slideshow to product showcase
     const scrollToShowcase = () => {
         showcaseRef.current?.scrollIntoView({ behavior: "smooth"});
@@ -27,30 +30,26 @@ export default function App() {
         topRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+
     return(
-        <>
-        {/* {main section} */}
-        <div ref={topRef}>
+        <div>
             <Header />
-            <Slideshow onShowcaseClick={scrollToShowcase} />
+
+            {/* {main section} */}
+            <div ref={topRef}>   
+                <Slideshow onShowcaseClick={scrollToShowcase} />
+            </div>
+
+            {/* <product showcase section */}
+            <div ref={showcaseRef}>
+                <ProductShowcase onBack={scrollToTop} />
+
+            </div>
+            
+            <Footer />
 
         </div>
-
-        {/* <product showcase section */}
-        <div ref={showcaseRef}>
-            <ProductShowcase onBack={scrollToTop} />
-
-        </div>
-        
-        <Footer />
-
-        </>
-    )
-
-
-
-
-
+    );
 
 
 }

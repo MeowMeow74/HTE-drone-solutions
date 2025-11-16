@@ -3,22 +3,33 @@
 
 // useState gives react a way to remember things between renders
 // able to update and have UI change
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
 // import imgx from ".....";
 
-export default function Slideshow({ onShowcaseClick }) {
+
+
+export default function Slideshow({ onShowcaseClick, showControls }) {
+
+    console.log('showControls = ', showControls);
 
     const slides = [
         { img: img1, title:"HTE vision", subtitle: "Innovation meets design"},
-        { img: img1, title:"Smart solutions", subtitle: "For a better tomorrow"},
-        { img: img1, title:"Want to learn more?", subtitle: "Contact us"}, 
+        { img: img2, title:"Smart solutions", subtitle: "For a better tomorrow"},
+        { img: img3, title:"Want to learn more?", subtitle: "Contact us"}
 
         // { img: imgx, title:"XYZ", subtitle: "...."}
-
     ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex(prev => (prev+1) % slides.length);
+        }, 4000);
+
+        return() => clearInterval(interval);
+    }, []);
 
     // keep trac of current slide
     const [index, setIndex] = useState(0);
@@ -42,7 +53,6 @@ export default function Slideshow({ onShowcaseClick }) {
 
     return (
         <div className="slideshow">
-
             {/* Slide container shifts left or right */}
             {/* - transform: translateX(-N%) shifts to the correct slide.
                 - If index = 0  → translateX(0%)
@@ -59,31 +69,41 @@ export default function Slideshow({ onShowcaseClick }) {
                         {/* image for slide */}
                         <img src={slide.img} alt={`Slide ${i + 1}`} />
                         
-                        {/* title + subtitle layred on img */}
-                        <h2>
-                            {slide.title}
-                            <span>{slide.subtitle}</span>
-                        </h2>
+                        <div className="slide-text-block">
+                            {/* title + subtitle layred on img */}
+                            <h2>
+                                {slide.title}
+                                <span>{slide.subtitle}</span>
+                            </h2>
+
+                            {/* product showcase button  */}
+                            <button className="showcase-btn" onClick={onShowcaseClick}>
+                            Product Showcase
+                            </button>
+            
+                            
+
+                        </div>
 
                     </div>
                 ))}
 
             </div>
 
-            {/* LEFT ARROW */}
-            <button className="nav-arrow left" onClick={prevSlide}>⟨</button>
+
+
+                        
+            {/* botom navigation bars ==> NOTE: edit names later maybe? */}
+            <div className="slide-bars">
+                {slides.map((slide, i) => (
+                    <div key={i} className={`bar ${i===index ? "active" : ""}`} onClick={() => setIndex(i)}>
+                    <span className="bar-label">{slide.title}</span>
+                    </div>
+                ))}
+            </div>
+
+           
             
-            {/* RIGHT ARROW */}
-            <button className="nav-arrow right" onClick={nextSlide}>⟩</button>
-
-            {/* product showcase button 
-                - calls scroll func pssed from app.jsx
-                - allows react to scroll to next section
-            */}
-
-            <button className="scroll-btn action-btn" onClick={onShowcaseClick}>
-                Product Showcase
-            </button>
 
         </div>
     );
