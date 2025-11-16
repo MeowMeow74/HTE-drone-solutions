@@ -27,7 +27,7 @@ export default function Slideshow({ onShowcaseClick, showControls }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex(prev => (prev+1) % slides.length);
-        }, 4500);
+        }, 8000);
 
     
 
