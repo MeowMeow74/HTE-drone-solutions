@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";  //useRef lets us scroll sm
 import Header from "./components/Header.jsx";
 import Slideshow from "./components/Slideshow.jsx";
 import ProductShowcase from "./components/ProductShowcase.jsx";
+import WhyChoose from "./components/WhyChoose.jsx"
 import Footer from "./components/Footer.jsx";
 import "./index.css";  // load css globally 
 
@@ -39,6 +40,9 @@ export default function App() {
             <div ref={topRef}>   
                 <Slideshow onShowcaseClick={scrollToShowcase} />
             </div>
+
+            {/* why choose section */}
+            <WhyChoose />
 
             {/* <product showcase section */}
             <div ref={showcaseRef}>

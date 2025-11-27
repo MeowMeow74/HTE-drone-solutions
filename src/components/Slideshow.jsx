@@ -93,20 +93,15 @@ export default function Slideshow({ onShowcaseClick, showControls }) {
 
             </div>
 
-
-
-                        
             {/* botom navigation bars ==> NOTE: edit names later maybe? */}
             <div className="slide-bars">
                 {slides.map((slide, i) => (
                     <div key={i} className={`bar ${i===index ? "active" : ""}`} onClick={() => setIndex(i)}>
                     <span className="bar-label">{slide.title}</span>
                     </div>
-                ))}
+                    ))}
             </div>
 
-           
-            
 
         </div>
     );
