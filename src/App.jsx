@@ -37,7 +37,7 @@ export default function App() {
             <Header />
 
             {/* {main section} */}
-            <div ref={topRef}>   
+            <div ref={topRef} className="top-anchor">   
                 <Slideshow onShowcaseClick={scrollToShowcase} />
             </div>
 

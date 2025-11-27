@@ -65,6 +65,11 @@ nav a:hover {
   }
 }
 
+.top-anchor {
+  scroll-margin-top: 60px;   /* same as your header height */
+}
+
+
 .slides {
   display: flex;
   height: 100%;
@@ -159,7 +164,7 @@ nav a:hover {
 }
 
 .bar.active {
-  background: #555;
+  background: black;
   width: 90px;
 }
 
@@ -232,6 +237,7 @@ nav a:hover {
   flex-direction: column;
   align-items: center;
   padding: 5em 2em 8em;
+  padding-bottom: 22rem;
 }
 
 .product-showcase h2 {
@@ -244,6 +250,64 @@ nav a:hover {
   margin-top: 2em;
   margin-bottom: 2em;
 }
+
+/* ==============================================
+   PRODUCT SHOWCASE — Sticky "Back to Main" Button
+   (Does NOT override your existing showcase CSS)
+================================================ */
+
+/* Sticky Back to Main button */
+.back-btn {
+    position: sticky;
+    top: 80px;          /* stays below the header */
+    z-index: 3000;
+    align-self: center;
+
+    /* keep your original button styling */
+    background: black;
+    color: white;
+    border: 2px solid black;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin-bottom: 2rem;
+}
+
+.back-btn:hover {
+    background: white;
+    color: black;
+}
+
+.showcase-back-btn {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  
+  /* STICKY behavior */
+  position: sticky;
+  top: 80px;            /* stays visible under your fixed header */
+  z-index: 999;
+}
+
+.showcase-back-btn:hover {
+  background: white;
+  color: black;
+  border: 2px solid black;
+}
+
+
+
+
+
 
 /* ===== FOOTER ===== */
 footer {
