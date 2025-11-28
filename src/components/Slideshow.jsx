@@ -16,9 +16,10 @@ export default function Slideshow({ onShowcaseClick, showControls }) {
     console.log('showControls = ', showControls);
 
     const slides = [
-        { img: img1, title:"HTE vision", subtitle: "Innovation meets design"},
-        { img: img2, title:"Smart solutions", subtitle: "For a better tomorrow"},
-        { img: img3, title:"Want to learn more?", subtitle: "Contact us"}
+        // can add in title and subtitles later
+        { img: img1},
+        { img: img2},
+        { img: img3}
 
         // { img: imgx, title:"XYZ", subtitle: "...."}
     ];
