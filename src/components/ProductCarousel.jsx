@@ -29,15 +29,18 @@ export default function ProductCarousel() {
                 style={{ transform: `translateX(-${index * 100}%)`}}>
                     {products.map((p, i) => (
                         <div className="pc-card" key={i}>
-                            <img src={p.img} className="pc-img" alt={p.name} />
+                            <div className="pc-img-wrapper">
+                                <img src={p.img} className="pc-img" alt={p.name} />
 
+                                {/* LEARN MORE BUTTON */}
+                                <a href={p.link} className="pc-learn-btn">
+                                    Learn More →
+                                </a>
+                            </div>
                             <h3 className="pc-name">{p.name}</h3>
                             <p className="pc-weight">{p.weight}</p>
 
-                            {/* LEARN MORE BUTTON */}
-                            <a href={p.link} className="pc-learn-more">
-                                Learn More →
-                            </a>
+                            
 
                         </div>
                     ))}
