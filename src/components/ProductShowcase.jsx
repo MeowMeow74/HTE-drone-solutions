@@ -6,7 +6,7 @@
 // - back to main button
 
 
-import img4 from "../assets/img4.png"
+import ProductCarousel from "./ProductCarousel";
 
 
 export default function ProductShowcase({ onBack }) {
@@ -28,8 +28,8 @@ export default function ProductShowcase({ onBack }) {
             {/* description */}
             <p>This is a place holder.  adding galleries and descriptions later</p>
 
-            {/* example product img */}
-            <img src={img4} alt="Product example" className="product-example-img" />
+            {/* product carousel */}
+            <ProductCarousel />
 
             {/* extra whitespace for future content */}
             <div className="botom-space"></div>

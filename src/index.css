@@ -393,7 +393,83 @@ nav a:hover {
 }
 
 
+/* ===== PRODUCT CAROUSEL ===== */
+.pc-container {
+  width: 100%;
+  text-align: center;
+}
 
+.pc-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.pc-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.pc-card {
+  min-width: 100%;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pc-img {
+  width: 80%;
+  max-width: 380px;
+  border-radius: 18px;
+  margin-bottom: 1rem;
+}
+
+.pc-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.pc-weight {
+  font-size: 1.25rem;
+  margin-top: 0.2rem;
+  color: #222;
+}
+
+.pc-learn-more {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+.pc-learn-more:hover {
+  color: #0d5ac7;
+  transform: translateX(3px);
+}
+
+.pc-dots {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.pc-dot {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.pc-dot.active {
+  background: #666;
+  transform: scale(1.25);
+}
 
 
 
